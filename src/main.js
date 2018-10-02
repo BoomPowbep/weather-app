@@ -1,9 +1,12 @@
-import Vue from 'vue'
-import App from './App.vue'
-import './registerServiceWorker'
+// import Vue from 'vue'
+// import App from './App.vue'
+// import './registerServiceWorker'
+//
+// Vue.config.productionTip = false
+//
+// new Vue({
+//   render: h => h(App)
+// }).$mount('#app')
 
-Vue.config.productionTip = false
+import AppMeteo from './assets/js/AppMeteo';
 
-new Vue({
-  render: h => h(App)
-}).$mount('#app')

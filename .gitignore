@@ -2,6 +2,7 @@
 node_modules
 package.json
 /dist
+.idea
 
 # local env files
 .env.local
