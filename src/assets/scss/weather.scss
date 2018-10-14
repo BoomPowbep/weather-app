@@ -1,0 +1,94 @@
+@import 'variables.scss';
+
+#appWeather {
+  width: 100%;
+  height: 100%;
+
+  display: none; // Or flex
+  z-index: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  //border: 1px dashed black;
+}
+
+#topSection {
+  //border: 1px solid black;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+
+  flex-grow: 1;
+
+  #mainTitle {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+    img {
+      //border: 1px solid black;
+      width: 1.4em;
+    }
+
+    .addToFavorites {
+      padding-right: 7px;
+      display: none;
+    }
+
+    .favorited {
+      padding-right: 7px;
+      display: none;
+    }
+
+    .localisationIcon {
+      padding-right: 7px;
+      display: none;
+    }
+
+    #editCity {
+      padding-left: 7px;
+      width: 1.7em;
+    }
+  }
+}
+
+#middleSection {
+  //border: 1px solid black;
+  color: white;
+
+  flex-grow: 3;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+//
+//#weatherIcon {
+//  img {
+//    max-width: 30vh;
+//    height: auto;
+//  }
+//}
+
+#bottomSection {
+  //border: 1px solid black;
+
+  flex-grow: 2;
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+
+  #bottomSection {
+    //border: 1px solid black;
+
+    flex-grow: 1;
+    max-height: 40%;
+  }
+}

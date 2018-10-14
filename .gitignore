@@ -4,6 +4,9 @@ package.json
 /dist
 .idea
 
+public/img/icons-old
+public/img/weather-icons
+
 # local env files
 .env.local
 .env.*.local

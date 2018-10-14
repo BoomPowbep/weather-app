@@ -1,0 +1,161 @@
+@import 'variables.scss';
+
+#searchCity {
+
+  width: 100%;
+  height: 100%;
+
+  display: none; // Or flex
+  z-index: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  //border: 1px dashed black;
+}
+
+#search {
+  //border: 1px solid black;
+  color: white;
+
+  width: 100%;
+  max-height: 65px;
+  padding-top: 10px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+
+  //flex-grow: 1;
+
+  #searchBar {
+    //border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+    #searchInputContainer {
+
+      height: 32px;
+      width: 80%;
+
+      #searchInput {
+        height: 100%;
+        width: 80%;
+
+        background: none;
+        border: none;
+        outline: none;
+        border-bottom: 2px solid #FFFFFF;
+
+        text-align: center;
+        color: #FFFFFF;
+        font-size: 1.5em;
+        font-family: 'Quicksand', sans-serif;
+        font-weight: bold;
+
+        transition: all 0.3s ease;
+
+        &:focus {
+          width: 90%;
+        }
+      }
+    }
+
+    img {
+      //border: 1px solid black;
+      padding-left: 5px;
+      max-width: 32px;
+      max-height: 32px;
+    }
+  }
+}
+
+#searchResults {
+  //border: 1px solid black;
+  background: rgba(255, 255, 255, 0.6);
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+
+  width: 100%;
+
+  overflow: scroll;
+
+  margin-top: 20px;
+
+  .searchResult {
+    //border: 1px solid black;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    text-align: center;
+
+    max-width: 100%;
+
+    margin: auto;
+    padding: 5px;
+
+    font-size: 1.2em;
+  }
+}
+
+#savedCities {
+
+  //border: 1px solid black;
+
+  z-index: 0;
+  max-width: 100%;
+  width: 100%;
+  overflow: scroll;
+
+  flex-grow: 3;
+
+  #myLocationSelector {
+    //border: 1px solid black;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 70px;
+    align-items: center;
+
+    img {
+      max-height: 1.6em;
+      width: auto;
+    }
+
+    h5 {
+      font-size: 1.6em;
+      margin-left: 20px;
+      color: $textWhite;
+    }
+  }
+
+  .savedCity {
+
+    border: 1px solid $lightShadow;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 70px;
+    align-items: center;
+
+    margin: 10px;
+
+    h5 {
+      font-size: 2em;
+      margin-left: 30px;
+      color: $textWhite;
+    }
+
+    input {
+      display: none;
+    }
+  }
+}

@@ -24,3 +24,9 @@ npm run test
 ```
 npm run lint
 ```
+### slkfdgjgdk
+```
+npm install chart.js --save
+```
+
+Design inspiration : https://dribbble.com/shots/3011558-Weather-App

@@ -1,12 +1,9 @@
-// import Vue from 'vue'
-// import App from './App.vue'
-// import './registerServiceWorker'
-//
-// Vue.config.productionTip = false
-//
-// new Vue({
-//   render: h => h(App)
-// }).$mount('#app')
+import './assets/scss/main.scss';
+import WeatherApp from './assets/js/WeatherApp';
 
-import AppMeteo from './assets/js/AppMeteo';
+(() => {
 
+    let app = new WeatherApp();
+    app.startApp();
+
+})();

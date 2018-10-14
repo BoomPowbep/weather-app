@@ -1,17 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="manifest" href="<%= BASE_URL %>manifest.json">
     <title>weather-app</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but weather-app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+</head>
+<body>
+<noscript>
+    <strong>We're sorry but weather-app doesn't work properly without JavaScript enabled. Please enable it to
+        continue.</strong>
+</noscript>
+
+<div id="appLoading">
+    <section id="loader">
+        <div id="loadImageContainer">
+            <img src="img/weather-icons/sunny.png">
+        </div>
+    </section>
+    <h1></h1>
+</div>
+
+<div id="appWeather">
+
+    <section id="topSection">
+        <div id="mainTitle">
+            <img class="addToFavorites" src="img/starborder.svg">
+            <img class="favorited" src="img/starfull.svg">
+            <img class="localisationIcon" src="img/location.svg">
+            <h3 id="cityName"></h3>
+            <img id="editCity" src="img/pen.svg">
+        </div>
+    </section>
+
+    <section id="middleSection">
+        <div id="weatherIcon">
+
+        </div>
+        <h1 id="currentTemperature"></h1>
+    </section>
+
+    <section id="bottomSection">
+        <div id="forecastChartContainer">
+            <canvas id="forecastChart" width="400" height="200"></canvas>
+        </div>
+    </section>
+
+</div>
+
+<div id="searchCity">
+
+    <section id="search">
+        <div id="searchBar">
+            <div id="searchInputContainer"><input autocomplete="off" type="text" placeholder="Search a city" id="searchInput" name="searchInput" /></div>
+            <img id="backToWeather" src="img/cancel.svg">
+        </div>
+    </section>
+
+    <section id="searchResults">
+
+    </section>
+
+    <section id="savedCities">
+
+        <div id="myLocationSelector">
+            <img class="addToFavorites" src="img/starborder.svg">
+            <img class="favorited" src="img/starfull.svg">
+            <img class="localisationIcon" src="img/location.svg">
+            <h5>Localization unavailable</h5>
+        </div>
+
+    </section>
+
+</div>
+<!-- built files will be auto injected -->
+</body>
 </html>
