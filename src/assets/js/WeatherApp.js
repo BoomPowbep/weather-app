@@ -5,7 +5,6 @@
  ****************************/
 
 import Chart from 'chart.js';
-// eslint-disable-next-line
 import Utils from './Utils';
 
 class WeatherApp {
@@ -40,6 +39,8 @@ class WeatherApp {
         Utils.registerAll(document.querySelectorAll('.addToFavorites'), 'mousedown', this.p_addToFavorites.bind(this));
         Utils.registerAll(document.querySelectorAll('.favorited'), 'mousedown', this.p_removeFromFavorites.bind(this));
 
+        /********************/
+        // Load a saved city data
         let savedCities = document.querySelectorAll('.savedCity');
         let iterator = null;
         for(iterator of savedCities) {
@@ -47,89 +48,11 @@ class WeatherApp {
             let data = iterator.querySelector('input');
             iterator.addEventListener('mousedown', () => { this.p_loadSavedCity(data.value) });
         }
+        /********************/
 
         document.querySelector('#editCity').addEventListener('mousedown', this.p_editCity.bind(this));
         document.querySelector('#backToWeather').addEventListener('mousedown', this.p_backToWeather.bind(this));
         document.querySelector('#searchInput').addEventListener('keyup', this.p_handleAutoCompletion.bind(this));
-    }
-
-    /**
-     * Click on the pen in the weather section
-     */
-    p_editCity() {
-        document.querySelector('#appWeather').style.display = 'none';
-        document.querySelector('#searchCity').style.display = 'flex';
-    }
-
-    /**
-     * Click on the 'x' in the search section
-     */
-    p_backToWeather() {
-        document.querySelector('#appWeather').style.display = 'flex';
-        document.querySelector('#searchCity').style.display = 'none';
-        document.querySelector('#searchInput').value = '';
-        Utils.removeAllChildren('#searchResults');
-    }
-
-    /**
-     * Auto completion worker
-     */
-    p_handleAutoCompletion() {
-
-        let searchValue = document.querySelector('#searchInput').value;
-        if (searchValue !== '') {
-            let xhttp = new XMLHttpRequest();
-            xhttp.addEventListener('readystatechange', () => {
-                if (xhttp.readyState === 4 && xhttp.status === 200) {
-                    // console.log(xhttp);
-
-                    Utils.removeAllChildren('#searchResults');
-
-                    let parent = document.querySelector('#searchResults');
-
-                    for (let result of JSON.parse(xhttp.responseText)) {
-                        // console.log(result);
-                        let suggestion = document.createElement('div');
-                        suggestion.classList.add('searchResult');
-                        suggestion.innerHTML = result.name;
-                        parent.appendChild(suggestion);
-
-                        let hiddenInfo = document.createElement('input');
-                        hiddenInfo.classList.add('resultData');
-                        hiddenInfo.type = 'hidden';
-                        hiddenInfo.value = JSON.stringify(result);
-                        suggestion.appendChild(hiddenInfo);
-                    }
-
-                    let results = document.querySelectorAll('.searchResult');
-                    // console.log(this);
-                    for (let i = 0; i < results.length; i += 1) {
-                        results[i].addEventListener('mousedown', this.p_selectResult.bind(this, results[i].querySelector('.resultData').value));
-                    }
-                }
-            });
-            let requestAddr = 'http://api.apixu.com/v1/search.json?key=1dc9461bdc1d4464ae2121718180210&q=' + searchValue;
-            // console.log(requestAddr);
-            xhttp.open('GET', requestAddr, true);
-            xhttp.send();
-        }
-        else {
-            Utils.removeAllChildren('#searchResults');
-        }
-    }
-
-    p_selectResult(el) {
-        console.log(el);
-        el = JSON.parse(el);
-        this.p_adjacentIconStatus = 'unfavorited';
-        this.p_getWeatherData(el.lat, el.lon);
-    }
-
-    p_loadSavedCity(data) {
-        console.log(data);
-        this.p_adjacentIconStatus = 'favorited';
-        data = JSON.parse(data);
-        this.p_getWeatherData(data.lat, data.long);
     }
 
     /**
@@ -249,7 +172,7 @@ class WeatherApp {
         for (let day of weatherData.forecast.forecastday) {
             // console.log(day.date, day.day.avgtemp_c);
             forecast.push({
-                day: day.date.substring(5).replace('-', '/'),
+                day: day.date.substring(5).replace('-', '/'), // MM/DD
                 temp: day.day.avgtemp_c
             });
         }
@@ -329,6 +252,9 @@ class WeatherApp {
         document.querySelector('#weatherIcon').innerHTML = '<img src="img/weather-icons-svg/' + image + '">';
     }
 
+    /**
+     * Displays the right icon next to the city name
+     */
     p_displayAdjacentIcon() {
 
         console.log(this.p_adjacentIconStatus);
@@ -447,29 +373,95 @@ class WeatherApp {
     }
 
     /**
-     * Adds the current city to the favorites list
+     * Click on the pen in the weather section
      */
-    p_addToFavorites() {
-        this.p_saveToStorage();
-
-        // let storage = localStorage.getItem('saved_cities');
-        // if (storage) {
-        //
-        //     let dataJSON = JSON.parse(storage);
-        //     let iterator = null;
-        //
-        //     for (iterator of dataJSON.cities) {
-        //
-        //         this.p_buildFavorite(iterator);
-        //     }
-        // }
-
-        this.p_buildFavorite(this.p_currentCity);
-
-        this.p_adjacentIconStatus = 'favorited';
-        this.p_displayAdjacentIcon();
+    p_editCity() {
+        document.querySelector('#appWeather').style.display = 'none';
+        document.querySelector('#searchCity').style.display = 'flex';
     }
 
+    /**
+     * Click on the 'x' in the search section
+     */
+    p_backToWeather() {
+        document.querySelector('#appWeather').style.display = 'flex';
+        document.querySelector('#searchCity').style.display = 'none';
+        document.querySelector('#searchInput').value = '';
+        Utils.removeAllChildren('#searchResults');
+    }
+
+    /**
+     * Auto completion worker
+     */
+    p_handleAutoCompletion() {
+
+        let searchValue = document.querySelector('#searchInput').value;
+        if (searchValue !== '') {
+            let xhttp = new XMLHttpRequest();
+            xhttp.addEventListener('readystatechange', () => {
+                if (xhttp.readyState === 4 && xhttp.status === 200) {
+                    // console.log(xhttp);
+
+                    Utils.removeAllChildren('#searchResults');
+
+                    let parent = document.querySelector('#searchResults');
+
+                    for (let result of JSON.parse(xhttp.responseText)) {
+                        // console.log(result);
+                        let suggestion = document.createElement('div');
+                        suggestion.classList.add('searchResult');
+                        suggestion.innerHTML = result.name;
+                        parent.appendChild(suggestion);
+
+                        let hiddenInfo = document.createElement('input');
+                        hiddenInfo.classList.add('resultData');
+                        hiddenInfo.type = 'hidden';
+                        hiddenInfo.value = JSON.stringify(result);
+                        suggestion.appendChild(hiddenInfo);
+                    }
+
+                    let results = document.querySelectorAll('.searchResult');
+                    // console.log(this);
+                    for (let i = 0; i < results.length; i += 1) {
+                        results[i].addEventListener('mousedown', this.p_selectResult.bind(this, results[i].querySelector('.resultData').value));
+                    }
+                }
+            });
+            let requestAddr = 'http://api.apixu.com/v1/search.json?key=1dc9461bdc1d4464ae2121718180210&q=' + searchValue;
+            // console.log(requestAddr);
+            xhttp.open('GET', requestAddr, true);
+            xhttp.send();
+        }
+        else {
+            Utils.removeAllChildren('#searchResults');
+        }
+    }
+
+    /**
+     * Click on a search result
+     * @param el
+     */
+    p_selectResult(el) {
+        console.log(el);
+        el = JSON.parse(el);
+        this.p_adjacentIconStatus = 'unfavorited';
+        this.p_getWeatherData(el.lat, el.lon);
+    }
+
+    /**
+     * Loads a selected saved city data
+     * @param data
+     */
+    p_loadSavedCity(data) {
+        console.log(data);
+        this.p_adjacentIconStatus = 'favorited';
+        data = JSON.parse(data);
+        this.p_getWeatherData(data.lat, data.long);
+    }
+
+    /**
+     * Save the new values to the browser storage
+     */
     p_saveToStorage() {
 
         let storage = localStorage.getItem('saved_cities');
@@ -490,29 +482,9 @@ class WeatherApp {
         }
     }
 
-    p_isAlreadyFavorited(city) {
-
-        let storage = localStorage.getItem('saved_cities');
-
-        if (!storage) {
-            return false;
-        }
-        else {
-
-            let dataJSON = JSON.parse(storage);
-            let iterator = null;
-
-            for (iterator of dataJSON.cities) {
-                console.log(iterator);
-                if (iterator.name === city) {
-                    return true; // Has already been added to favorites
-                }
-            }
-
-            return false;
-        }
-    }
-
+    /**
+     * Gets favorites from the browser storage
+     */
     p_getFavorites() {
 
         let storage = localStorage.getItem('saved_cities');
@@ -530,6 +502,22 @@ class WeatherApp {
         }
     }
 
+    /**
+     * Adds the current city to the favorites list
+     */
+    p_addToFavorites() {
+        this.p_saveToStorage();
+
+        this.p_buildFavorite(this.p_currentCity); // Adds to the DOM
+
+        this.p_adjacentIconStatus = 'favorited';
+        this.p_displayAdjacentIcon();
+    }
+
+    /**
+     * Adds a favorite to the DOM
+     * @param iterator
+     */
     p_buildFavorite(iterator) {
 
         /**
@@ -585,6 +573,10 @@ class WeatherApp {
         }
     }
 
+    /**
+     * Removes a favorite from the DOM
+     * @param name
+     */
     p_removeFavoriteDOM(name) {
 
         document.querySelector('#savedCities').removeChild(document.querySelector('#' + name));

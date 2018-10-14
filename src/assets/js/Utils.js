@@ -13,6 +13,12 @@ class Utils {
         return (numberString[0] === '0') ? numberString.substring(1) : numberString;
     }
 
+    /**
+     * Registers an event listener for a list of elements
+     * @param elements
+     * @param action
+     * @param callback
+     */
     static registerAll(elements, action, callback) {
         let iterator = null;
         for(iterator of elements) {
@@ -20,6 +26,10 @@ class Utils {
         }
     }
 
+    /**
+     * Hides multiple elements
+     * @param elements
+     */
     static hideAll(elements) {
         let iterator = null;
         for(iterator of elements) {
@@ -27,6 +37,11 @@ class Utils {
         }
     }
 
+    /**
+     * Shows multiple elements
+     * @param elements
+     * @param type
+     */
     static showAll(elements, type = 'block') {
         let iterator = null;
         for(iterator of elements) {
@@ -34,6 +49,10 @@ class Utils {
         }
     }
 
+    /**
+     * Removes all children from a parent
+     * @param parentId
+     */
     static removeAllChildren(parentId) {
         let parent = document.querySelector(parentId);
         // removes all children
@@ -46,7 +65,6 @@ class Utils {
      * TODO: fix the bug: doesn't stops
      * Fades in the element passed as argument
      * @param element
-     * @param duration
      * @param display
      */
     static fadeIn(element, display) {

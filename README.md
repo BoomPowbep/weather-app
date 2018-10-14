@@ -14,19 +14,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-### slkfdgjgdk
-```
-npm install chart.js --save
-```
-
-Design inspiration : https://dribbble.com/shots/3011558-Weather-App
