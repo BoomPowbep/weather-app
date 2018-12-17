@@ -8,12 +8,21 @@ html, body {
   height: 100%;
   margin: 0;
   overflow: hidden;
+  //background-color: #FFFFFF;
 }
 
 body {
-  background-image: linear-gradient($sunnyHighColor, $sunnyLowColor);
   font-family: 'Quicksand', sans-serif;
   text-shadow: 0 0 11px $lightShadow;
+}
+
+main {
+  background-image: linear-gradient($sunnyHighColor, $sunnyLowColor);
+  width: 375px;
+  height: 670px;
+  margin: 0;
+  left: calc(50vw - 187.5px);
+  position: absolute;
 }
 
 #mainTitle {
@@ -38,26 +47,4 @@ h5 {
 img {
   width: 30vh;
   height: auto;
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-
-  #appWeather {
-    overflow: scroll;
-  }
-
-  h1 {
-    margin: 10px 0 0 0;
-
-    font-size: 5em;
-  }
-
-  h3 {
-    font-size: 3em;
-  }
-
-  h5 {
-    font-size: 2em;
-  }
 }

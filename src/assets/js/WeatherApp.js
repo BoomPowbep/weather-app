@@ -248,7 +248,7 @@ class WeatherApp {
             cssGradient = 'linear-gradient(' + stormyHightColor + ', ' + stormyLowColor + ')';
         }
 
-        document.querySelector('body').style.backgroundImage = cssGradient;
+        document.querySelector('main').style.backgroundImage = cssGradient;
         document.querySelector('#weatherIcon').innerHTML = '<img src="img/weather-icons-svg/' + image + '">';
     }
 
