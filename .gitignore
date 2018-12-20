@@ -2,7 +2,7 @@
 node_modules
 package.json
 /dist
-.idea
+.idea/
 
 public/img/icons-old
 public/img/weather-icons
